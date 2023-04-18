@@ -1,0 +1,6 @@
+project: dashmap
+target: insert
+duration: 90
+
+cmds:
+    - cmd: /insert
