@@ -17,5 +17,3 @@ RUN cargo +nightly fuzz build
 FROM --platform=linux/amd64 rustlang/rust:nightly
 
 ## TODO: Change <Path in Builder Stage>
-COPY --from=builder /{{ project_name }}/fuzz/target/x86_64-unknown-linux-gnu/release/filename /
-COPY --from=builder /parcel-css/fuzz/target/x86_64-unknown-linux-gnu/release/parser /

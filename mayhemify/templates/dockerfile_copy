@@ -1,0 +1,3 @@
+
+
+COPY --from=builder /{{ project_name }}/fuzz/target/x86_64-unknown-linux-gnu/release/{{ harness_name }} /

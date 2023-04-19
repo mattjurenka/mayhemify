@@ -1,0 +1,7 @@
+
+
+[[bin]]
+name = "{{ harness_name }}"
+path = "fuzz_targets/{{ harness_name }}.rs"
+test = false
+doc = false

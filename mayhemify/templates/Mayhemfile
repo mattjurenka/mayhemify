@@ -1,6 +1,8 @@
-project: dashmap
-target: insert
+project: {{ project_name }}
+target: {{ harness_name }}
 duration: 90
 
 cmds:
-    - cmd: /insert
+    - cmd: /{{ harness_name }}
+
+

@@ -47,19 +47,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Start analysis of Insert
-        uses: ForAllSecure/mcode-action@v1
-        with:
-          mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
-          args: --file mayhemfiles/Mayhemfile_Insert --image ${{ steps.meta.outputs.tags }}
-          sarif-output: sarif
+      # ------ mcode-action steps
 
-      - name: Start analysis of Insert Set
-        uses: ForAllSecure/mcode-action@v1
-        with:
-          mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
-          args: --file mayhemfiles/Mayhemfile_Insert_Set --image ${{ steps.meta.outputs.tags }}
-          sarif-output: sarif
+
+      # ------ end mcode-action steps
 
       - name: Upload SARIF file(s)
         uses: github/codeql-action/upload-sarif@v1
