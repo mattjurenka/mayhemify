@@ -10,7 +10,11 @@ setup(
     install_requires=[
         'Click',
         'GitPython',
-        'Jinja2'
+        'Jinja2',
+        'requests',
+        'giturlparse',
+        'paramiko',
+        'toml',
     ],
     entry_points={
         'console_scripts': [

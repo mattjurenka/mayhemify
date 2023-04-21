@@ -2,6 +2,7 @@ import click
 import os
 import re
 import pkgutil
+import toml
 
 from jinja2 import Environment, BaseLoader
 from os import path
@@ -31,3 +32,15 @@ def render_template(template_name, render_dict={}):
     ).decode('utf-8')
     jinja_template = Environment(loader=BaseLoader()).from_string(template_str)
     return jinja_template.render(**render_dict)
+
+def get_config_toml():
+    # check if config.toml exists in ~/.config/mayhemify/
+    config_path = os.path.expanduser("~/.config/mayhemify/config.toml")
+    if not os.path.exists(config_path):
+        click.echo("You don't have a config.toml file. Creating one...")
+        os.makedirs(os.path.dirname(config_path), exist_ok=True)
+        copy_template(config_path, "config.toml")
+
+    # read config.toml
+    with open(config_path) as f:
+        return toml.loads(f.read())
