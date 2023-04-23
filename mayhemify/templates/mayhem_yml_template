@@ -3,7 +3,7 @@
         uses: ForAllSecure/mcode-action@v1
         with:
           mayhem-token: {% raw %}${{ secrets.MAYHEM_TOKEN }}{% endraw %}
-          args: --file mayhemfiles/Mayhemfile_{{ harness_name }} --image {% raw %}${{ steps.meta.outputs.tags }}{% endraw %}
+          args: --file fuzz/mayhemfiles/Mayhemfile_{{ harness_name }} --image {% raw %}${{ steps.meta.outputs.tags }}{% endraw %}
           sarif-output: sarif
 
 
