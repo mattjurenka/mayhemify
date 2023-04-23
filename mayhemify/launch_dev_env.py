@@ -249,9 +249,8 @@ def launch_dev_env(repo):
         git clone {repo} &&
         git clone https://{git_url.owner}:{gh_pat}@github.com/mattjurenka/mayhemify &&
         pip3 install ~/mayhemify/ &&
-        cd {git_url.name} &&
         git config --global user.email "{gh_email}" &&
-        git config --global user.name "{gh_username}" &&
+        git config --global user.name "{gh_username}"
     """, instance_ip)
 
     # todo: fix mayhemify init
@@ -260,4 +259,4 @@ def launch_dev_env(repo):
     # workflow permission -> read and write
 
     click.echo(bold(f"Dev environment is ready!"))
-    click.echo(f"Connect with vscode or use `ssh {hostname}` to connect.")
+    click.echo(f"Connect with vscode or use `ssh {label}` to connect.")
