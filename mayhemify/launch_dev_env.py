@@ -182,6 +182,20 @@ def launch_dev_env(repo):
         click.echo("Invalid repo argument. Please use an https or ssh URL.")
         return
 
+    #get git_pat
+    gh_pat = get_config_toml()['github_pat']
+    if gh_pat == "":
+        click.echo("Please set your Github Personal Access Token in ~/.config/mayhemify/config.toml")
+        raise SystemExit
+    gh_username = get_config_toml()['github_username']
+    if gh_username == "":
+        click.echo("Please set your Github username in ~/.config/mayhemify/config.toml")
+        raise SystemExit
+    gh_email = get_config_toml()['github_email']
+    if gh_email == "":
+        click.echo("Please set your Github email in ~/.config/mayhemify/config.toml")
+        raise SystemExit
+
     list_instances_url = "https://api.vultr.com/v2/instances"
     list_response = requests.get(list_instances_url, headers=get_vultr_headers())
     list_response.raise_for_status()
@@ -219,8 +233,9 @@ def launch_dev_env(repo):
 
     click.echo(f"Adding host to {'~/.ssh/config'}...")
     add_host_to_ssh_config(instance_ip, label)
+    
     click.echo("Server is booting, connecting to SSH, could take a few minutes...")
-
+    click.echo(bold("TAKE THIS TIME TO SET GITHUB WORKFLOW PERMISSION TO READ AND WRITE"))
 
     run_command(f"""
         apt-get update -y &&
@@ -231,10 +246,18 @@ def launch_dev_env(repo):
         rustup install nightly &&
         rustup default nightly &&
         cargo install cargo-fuzz &&
-        git clone {repo}
+        git clone {repo} &&
+        git clone https://{git_url.owner}:{gh_pat}@github.com/mattjurenka/mayhemify &&
+        pip3 install ~/mayhemify/ &&
+        cd {git_url.name} &&
+        git config --global user.email "{gh_email}" &&
+        git config --global user.name "{gh_username}" &&
     """, instance_ip)
+
+    # todo: fix mayhemify init
+    # add cargo +nightly fuzz <target> command
 
     # workflow permission -> read and write
 
     click.echo(bold(f"Dev environment is ready!"))
-    click.echo(f"Connect with vscode or use `ssh {host}` to connect.")
+    click.echo(f"Connect with vscode or use `ssh {hostname}` to connect.")

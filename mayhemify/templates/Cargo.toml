@@ -1,4 +1,4 @@
-package]
+[package]
 name = "{{ project_name }}-fuzz"
 version = "0.1.0"
 authors = ["Automatically generated"]
@@ -11,13 +11,10 @@ cargo-fuzz = true
 [dependencies]
 libfuzzer-sys = "0.4"
 
-# Uncomment the correct repo and delete the other comments
-#
-# [dependencies.REPLACE_WITH_NAME_OF_PACKAGE]
-# path = ".."
-# 
-# TODO: Add instructions in case of workspace
-# TODO: Add instructions in case of feature
+[dependencies.REPLACE_WITH_NAME_OF_PACKAGE]
+# DELETE ME: Ensure path is a path relative to this Cargo.toml pointing to
+# DELETE ME: the pacakge you want to import from the repo.
+path = ".."
 
 # Prevent this from interfering with workspaces
 [workspace]

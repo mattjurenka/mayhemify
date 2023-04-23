@@ -69,7 +69,7 @@ def add_harness(name):
             in render_template("mayhem_yml_template", {'harness_name': name}).split("\n")
         ]
         with open(path.join(workflows_dir, "mayhem.yml"), 'w') as f:
-            f.write(' '.join(contents))
+            f.write(''.join(contents))
     except:
         click.echo('Unable to parse mayhem.yml file. You must add this manually.')
     click.echo('')
