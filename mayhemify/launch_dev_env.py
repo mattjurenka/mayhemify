@@ -250,7 +250,7 @@ def launch_dev_env(repo):
         git clone https://{git_url.owner}:{gh_pat}@github.com/mattjurenka/mayhemify /tmp/mayhemify &&
         pip3 install /tmp/mayhemify/ &&
         git config --global user.email "{gh_email}" &&
-        git config --global user.name "{gh_username}" &&
+        git config --global user.name "{gh_username}"
     """, instance_ip)
 
     # todo: fix mayhemify init
