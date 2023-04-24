@@ -1,0 +1,7 @@
+{
+    "keyboard.dispatch": "keyCode",
+    "rust-analyzer.linkedProjects": [
+        "/root/{{project_name}}/Cargo.toml",
+        "/root/{{project_name}}/fuzz/Cargo.toml"
+    ],
+}

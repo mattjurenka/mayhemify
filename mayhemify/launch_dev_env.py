@@ -251,12 +251,6 @@ def launch_dev_env(repo):
         pip3 install /tmp/mayhemify/ &&
         git config --global user.email "{gh_email}" &&
         git config --global user.name "{gh_username}" &&
-        '{{' \\
-        '    "rust-analyzer.linkedProjects": [' \\
-        '        "/root/fastcrypto/Cargo.toml",' \\
-        '        "/root/fastcrypto/fuzz/Cargo.toml"' \\
-        '    ]' \\
-        '\}}' > /root/.vscode-server/data/Machine/settings.json
     """, instance_ip)
 
     # todo: fix mayhemify init

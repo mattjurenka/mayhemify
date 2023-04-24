@@ -60,3 +60,10 @@ def init():
     copy_template(
         path.join(fuzz_dir, 'Dockerfile'), 'Dockerfile', {'project_name': project_name}
     )
+
+    click.echo(bold('Overwriting vscode settings.'))
+    click.echo(f"Copying settings.json to /root/.vscode-server/data/Machine/settings.json")
+    copy_template(
+        "/root/.vscode-server/data/Machine/settings.json",
+        'settings.json', {'project_name': project_name}
+    )
