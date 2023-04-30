@@ -46,8 +46,8 @@ def get_or_create_ssh_key():
     pubkey = get_or_create_local_ssh_key()
     hash = get_ssh_hash(pubkey)
 
-    list_keys_url = "https://api.vultr.com/v2/ssh-keys"
-    list_response = requests.get(list_keys_url, headers=get_vultr_headers())
+    keys_url = "https://api.vultr.com/v2/ssh-keys"
+    list_response = requests.get(keys_url, headers=get_vultr_headers())
     list_response.raise_for_status()
     list_json = list_response.json()
 
@@ -65,7 +65,7 @@ def get_or_create_ssh_key():
     # otherwise delete all keys and create a new one
     click.echo("Uploading SSH key to Vultr...")
 
-    new_response = requests.post(new_key_url, headers=get_vultr_headers(), json={
+    new_response = requests.post(keys_url, headers=get_vultr_headers(), json={
         "name": "mayhemify-" + hash,
         "ssh_key": pubkey,
     })
