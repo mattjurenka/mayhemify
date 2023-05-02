@@ -56,7 +56,7 @@ def add_harness(name):
     with open(path.join(workflows_dir, "mayhem.yml"), 'r') as f:
         mayhem_yml = yaml.safe_load(f)
 
-    mayhem_yml['jobs']['mayhem']['strategy']['matrix']['mayhemfile'].append(f"fuzz/Mayhemfile_{name}")
+    mayhem_yml['jobs']['mayhem']['strategy']['matrix']['mayhemfile'].append(f"fuzz/mayhemfiles/Mayhemfile_{name}")
 
     with open(path.join(workflows_dir, "mayhem.yml"), 'w') as f:
         yaml.dump(mayhem_yml, f, sort_keys=False, width=float("inf"))
