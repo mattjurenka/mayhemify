@@ -1,6 +1,6 @@
 {% raw %}
 name: Mayhem
-on:
+'on':
   push:
   pull_request:
   workflow_dispatch:
