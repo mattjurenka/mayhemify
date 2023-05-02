@@ -1,6 +1,6 @@
 import click
 import os
-import pkgutil
+import yaml
 
 from os import path
 
@@ -53,25 +53,13 @@ def add_harness(name):
     click.echo('')
 
     click.echo(bold("Adding entry to mayhem.yml"))
-    contents = []
     with open(path.join(workflows_dir, "mayhem.yml"), 'r') as f:
-        contents = f.readlines()
+        mayhem_yml = yaml.safe_load(f)
 
-    search = "      # ------ end mcode-action steps\n"
-    try:
-        # search for second marker string
-        idx = contents.index(search)
-        click.echo(f"Inserting mayhem yml template into {workflows_dir}mayhem.yml")
+    mayhem_yml['jobs']['mayhem']['strategy']['matrix']['mayhemfile'].append(f"fuzz/Mayhemfile_{name}")
 
-        # insert yaml entry right before
-        contents[idx:idx] = [
-            line + '\n' for line
-            in render_template("mayhem_yml_template", {'harness_name': name}).split("\n")
-        ]
-        with open(path.join(workflows_dir, "mayhem.yml"), 'w') as f:
-            f.write(''.join(contents))
-    except:
-        click.echo('Unable to parse mayhem.yml file. You must add this manually.')
+    with open(path.join(workflows_dir, "mayhem.yml"), 'w') as f:
+        yaml.dump(mayhem_yml, f)
     click.echo('')
 
 

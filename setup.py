@@ -15,6 +15,7 @@ setup(
         'giturlparse',
         'paramiko',
         'toml',
+        'pyyaml',
     ],
     entry_points={
         'console_scripts': [
