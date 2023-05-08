@@ -3,5 +3,5 @@ target: {{ harness_name }}
 duration: 300
 
 cmds:
-    - cmd: /{{ harness_name }}
+  - cmd: /{{ harness_name }}
 
