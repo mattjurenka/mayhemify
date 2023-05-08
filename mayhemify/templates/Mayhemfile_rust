@@ -1,8 +1,7 @@
 project: {{ project_name }}
 target: {{ harness_name }}
-duration: 90
+duration: 300
 
 cmds:
     - cmd: /{{ harness_name }}
-
 

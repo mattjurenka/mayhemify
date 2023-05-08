@@ -3,9 +3,10 @@ import os
 
 from os import path
 
-from mayhemify.utils import bold, get_repo_dir, copy_template
+from mayhemify.utils import bold, get_repo_dir, copy_template, Language
 
 @click.command()
+@click.option('--language', '-l', type=click.Choice([l.value for l in Language]), default=Language.RUST.value)
 def init():
     """
     Script to prepare an existing Rust project for fuzzing with Mayhem.
@@ -42,10 +43,12 @@ def init():
     click.echo(f"Creating folder {fuzz_dir}")
     click.echo(f"Creating folder {fuzz_targets_dir}")
     os.makedirs(fuzz_targets_dir, exist_ok=True)
-    click.echo(f"Copying Cargo.toml to {fuzz_dir}Cargo.toml")
-    copy_template(
-        path.join(fuzz_dir, 'Cargo.toml'), "Cargo.toml", {'project_name': project_name}
-    )
+
+    if language == Language.RUST.value:
+        click.echo(f"Copying Cargo.toml to {fuzz_dir}Cargo.toml")
+        copy_template(
+            path.join(fuzz_dir, 'Cargo.toml'), "Cargo.toml", {'project_name': project_name}
+        )
     click.echo(f"Copying .gitignore to {fuzz_dir}.gitignore")
     copy_template(path.join(fuzz_dir, '.gitignore'), "gitignore")
     click.echo('')
@@ -58,7 +61,7 @@ def init():
     click.echo(bold('Initializing Dockerfile'))
     click.echo(f"Copying Dockerfile to {fuzz_dir}Dockerfile")
     copy_template(
-        path.join(fuzz_dir, 'Dockerfile'), 'Dockerfile', {'project_name': project_name}
+        path.join(fuzz_dir, 'Dockerfile'), f"Dockerfile_{language}", {'project_name': project_name}
     )
 
     click.echo(bold('Overwriting vscode settings.'))

@@ -1,0 +1,6 @@
+FROM fuzzers/atheris:2.0.7-python3.9
+
+ADD . /{{ project_name }}
+WORKDIR /{{ project_name }}
+
+RUN python3 -m pip install .

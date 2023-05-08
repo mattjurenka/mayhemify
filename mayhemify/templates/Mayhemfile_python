@@ -1,0 +1,7 @@
+project: {{ project_name }}
+target: {{ harness_name }}
+duration: 300
+
+cmds:
+    - cmd: /{{ project_name }}/fuzz/fuzz_targets/{{ harness_name }}.py
+

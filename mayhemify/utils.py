@@ -7,6 +7,7 @@ import toml
 from jinja2 import Environment, BaseLoader
 from os import path
 from git import Repo
+from enum import Enum
 
 def bold(s):
     return click.style(s, bold="true")
@@ -44,3 +45,7 @@ def get_config_toml():
     # read config.toml
     with open(config_path) as f:
         return toml.loads(f.read())
+
+class Language(Enum):
+    RUST = "rust"
+    PYTHON = "python"
