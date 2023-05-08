@@ -7,7 +7,7 @@ from mayhemify.utils import bold, get_repo_dir, copy_template, Language
 
 @click.command()
 @click.option('--language', '-l', type=click.Choice([l.value for l in Language]), default=Language.RUST.value)
-def init():
+def init(language):
     """
     Script to prepare an existing Rust project for fuzzing with Mayhem.
     Adds Mayhemfile, Dockerfile, and fuzz folder skeleton.
