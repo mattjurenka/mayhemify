@@ -3,5 +3,5 @@ target: {{ harness_name }}
 duration: 300
 
 cmds:
-  - cmd: /{{ project_name }}/fuzz/fuzz_targets/{{ harness_name }}.py
+  - cmd: python3 /{{ project_name }}/fuzz/fuzz_targets/{{ harness_name }}.py
     libfuzzer: true
