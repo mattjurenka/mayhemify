@@ -26,8 +26,9 @@ def add_harness(name, language):
 
     workflows_dir = path.join(repo_dir, ".github/workflows/")
     fuzz_dir = path.join(repo_dir, "fuzz/")
+    mayhem_dir = path.join(repo_dir, "fuzz/")
     fuzz_targets_dir = path.join(fuzz_dir, "fuzz_targets/")
-    mayhemfiles_dir = path.join(fuzz_dir, "mayhemfiles/")
+    mayhemfiles_dir = path.join(mayhem_dir, "mayhemfiles/")
 
     click.echo(bold("Adding harness source file"))
 
@@ -51,9 +52,9 @@ def add_harness(name, language):
         click.echo('')
 
     click.echo(bold("Adding Mayhemfile"))
-    click.echo(f"Copying Mayhemfile template to {mayhemfiles_dir}Mayhemfile_{name}")
+    click.echo(f"Copying Mayhemfile template to {mayhemfiles_dir}{name}.mayhemfile")
     copy_template(
-        path.join(mayhemfiles_dir, f"Mayhemfile_{name}"),
+        path.join(mayhemfiles_dir, f"{name}.mayhemfile"),
         f"Mayhemfile_{language}",
         {'harness_name': name, 'project_name': project_name},
     )
@@ -63,7 +64,7 @@ def add_harness(name, language):
     with open(path.join(workflows_dir, "mayhem.yml"), 'r') as f:
         mayhem_yml = yaml.safe_load(f)
 
-    mayhem_yml['jobs']['mayhem']['strategy']['matrix']['mayhemfile'].append(f"fuzz/mayhemfiles/Mayhemfile_{name}")
+    mayhem_yml['jobs']['mayhem']['strategy']['matrix']['mayhemfile'].append(f"mayhem/mayhemfiles/{name}.mayhemfile")
 
     with open(path.join(workflows_dir, "mayhem.yml"), 'w') as f:
         yaml.dump(mayhem_yml, f, sort_keys=False, width=float("inf"))

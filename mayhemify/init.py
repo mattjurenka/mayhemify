@@ -16,8 +16,9 @@ def init(language):
 
     workflows_dir = path.join(repo_dir, ".github/workflows/")
     fuzz_dir = path.join(repo_dir, "fuzz/")
+    mayhem_dir = path.join(repo_dir, "mayhem/")
     fuzz_targets_dir = path.join(fuzz_dir, "fuzz_targets/")
-    mayhemfiles_dir = path.join(fuzz_dir, "mayhemfiles/")
+    mayhemfiles_dir = path.join(mayhem_dir, "mayhemfiles/")
 
     click.echo(bold(
         f'Detecting Project Name to be {project_name}',
@@ -53,15 +54,16 @@ def init(language):
     copy_template(path.join(fuzz_dir, '.gitignore'), "gitignore")
     click.echo('')
 
-    click.echo(bold('Initializing Mayhemfiles Folder'))
+    click.echo(bold('Initializing Mayhem Folder'))
+    click.echo(f"Creating folder {mayhem_dir}")
     click.echo(f"Creating folder {mayhemfiles_dir}")
     os.makedirs(mayhemfiles_dir, exist_ok=True)
     click.echo('')
 
     click.echo(bold('Initializing Dockerfile'))
-    click.echo(f"Copying Dockerfile to {fuzz_dir}Dockerfile")
+    click.echo(f"Copying Dockerfile to {mayhem_dir}Dockerfile")
     copy_template(
-        path.join(fuzz_dir, 'Dockerfile'), f"Dockerfile_{language}", {'project_name': project_name}
+        path.join(mayhem_dir, 'Dockerfile'), f"Dockerfile_{language}", {'project_name': project_name}
     )
 
     click.echo(bold('Overwriting vscode settings.'))

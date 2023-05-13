@@ -4,3 +4,4 @@ ADD . /{{ project_name }}
 WORKDIR /{{ project_name }}
 
 RUN python3 -m pip install .
+
