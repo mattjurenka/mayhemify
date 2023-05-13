@@ -26,7 +26,7 @@ def add_harness(name, language):
 
     workflows_dir = path.join(repo_dir, ".github/workflows/")
     fuzz_dir = path.join(repo_dir, "fuzz/")
-    mayhem_dir = path.join(repo_dir, "fuzz/")
+    mayhem_dir = path.join(repo_dir, "mayhem/")
     fuzz_targets_dir = path.join(fuzz_dir, "fuzz_targets/")
     mayhemfiles_dir = path.join(mayhem_dir, "mayhemfiles/")
 
