@@ -75,7 +75,7 @@ def add_harness(name, language):
         click.echo(bold("Modifying Dockerfile"))
         click.echo(f"Appending dockerfile copy template to {fuzz_dir}Dockerfile")
         copy_template(
-            path.join(fuzz_dir, 'Dockerfile'),
+            path.join(mayhem_dir, 'Dockerfile'),
             'dockerfile_copy',
             {'harness_name': name, 'project_name': project_name},
             'a'
