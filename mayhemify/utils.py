@@ -49,3 +49,4 @@ def get_config_toml():
 class Language(Enum):
     RUST = "rust"
     PYTHON = "python"
+

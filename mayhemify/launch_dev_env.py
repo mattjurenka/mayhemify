@@ -90,6 +90,7 @@ def get_instance_ip(instance_id):
         s_elapsed += ping_interval
 
 def add_host_to_ssh_config(ip, hostname):
+    # TODO: add config file if not exists
     # delete any existing host and all following lines
     with open(os.path.expanduser("~/.ssh/config"), "r") as f:
         lines = f.readlines()
@@ -260,3 +261,4 @@ def launch_dev_env(repo):
 
     click.echo(bold(f"Dev environment is ready!"))
     click.echo(f"Connect with vscode or use `ssh {label}` to connect.")
+
